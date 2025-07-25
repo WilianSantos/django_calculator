@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <section class="login">
+        <form action="">
+            <input type="email" name="email">
+            <input type="password" name="password">
+
+            <button type="submit">Entrar</button>
+            <a href="{% url 'register_page' %}">Não tem cadastro? Clique aqui</a>
+        </form> 
+    </section>
+{% endblock content %}
