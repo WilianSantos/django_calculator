@@ -1,12 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
     <section class="register">
-        <form action="">
+        <form action="{% url 'register_page' %}" encType="multipart/form-data" method="post" id="register-form">
+            {% csrf_token %}
             <h1>Preencha o formulário de Cadastro</h1>
-            <input type="text" name="name">
-            <input type="email" name="email">
-            <input type="password" name="password">
-            <input type="password" name="confirm_password">
+            {% include "partials/_alerts.html" %}
+            <div class="register__input">
+                <label for="name">Nome</label>
+                <input type="text" name="name">
+            </div>
+            <div class="register__input">
+                <label for="email">E-mail</label>
+                <input type="email" name="email">
+            </div>
+            <div class="register__input">
+                <label for="password">Senha</label>
+                <input type="password" name="password">
+            </div>
+            <div class="register__input">
+                <label for="confirm-password">Confirmar Senha</label>
+                <input type="password" name="confirm_password">
+            </div>
 
             <div>
                 <a href="{% url 'login_page' %}">
@@ -14,6 +28,69 @@
                 </a>
                 <button type="submit" class="register__btn__register">Registrar</button>
             </div>
-        </form> 
+        </form>
     </section>
+    <script>
+        const validator = new JustValidate('#register-form');
+
+        validator
+        .addField('[name="name"]', [
+            {
+            rule: 'required',
+            errorMessage: 'Nome obrigatório.',
+            },
+            {
+            rule: 'minLength',
+            value: 3,
+            errorMessage: 'Mínimo de 3 caracteres.',
+            },
+            {
+            rule: 'maxLength',
+            value: 100,
+            errorMessage: 'Máximo de 100 caracteres.',
+            },
+        ])
+        .addField('[name="email"]', [
+            {
+            rule: 'required',
+            errorMessage: 'E-mail obrigatório.',
+            },
+            {
+            rule: 'email',
+            errorMessage: 'E-mail inválido',
+            },
+        ])
+        .addField('[name="password"]', [
+            {
+            rule: 'required',
+            errorMessage: 'Insira uma senha.'
+            },
+            {
+            rule: 'minLength',
+            value: 8,
+            errorMessage: 'A senha deve ter pelo menos 8 caracteres',
+            },
+            {
+            rule: 'maxLength',
+            value: 128,
+            errorMessage: 'Máximo de 128 caracteres',
+            },
+        ])
+        .addField('[name="confirm_password"]', [
+            {
+            validator: (value, fields) => {
+                return value === fields['password'].elem.value;
+            },
+            errorMessage: 'Senhas não coincidem',
+            },
+        ])
+        .onSuccess((event) => {
+            console.log('Formulário válido');
+            event.target.submit();
+        })
+        .onFail((fields) => {
+            console.log('Formulário inválido:', fields);
+        });
+
+    </script>
 {% endblock content %}

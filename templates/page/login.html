@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
     <section class="login">
-        <form action="">
-            <input type="email" name="email">
-            <input type="password" name="password">
+        <form action="{% url 'login_page' %}" encType="multipart/form-data" method="post">
+            {% csrf_token %}
+            {% include "partials/_alerts.html" %}
+            <input type="email" name="email" placeholder="E-mail">
+            <input type="password" name="password" placeholder="Senha">
 
             <button type="submit">Entrar</button>
             <a href="{% url 'register_page' %}">Não tem cadastro? Clique aqui</a>

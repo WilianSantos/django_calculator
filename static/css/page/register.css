@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 30vh;
+    margin-top: 10vh;
     margin-left: 35vw;
 }
 
@@ -12,7 +12,7 @@
     display: flex;
     align-items: end;
     flex-direction: column;
-    background-color: #1e1b3a;
+    background-color: rgba(30, 27, 58, 0.8);
     padding: 10px;
     border-radius: 5px;
 }
@@ -20,6 +20,15 @@
 .register h1 {
     font-size: 24px;
     margin-bottom: 20px;
+}
+
+.register__input {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 5px;
+    margin-bottom: 10px;
 }
 
 .register input {
@@ -52,4 +61,24 @@
 
 .register__btn__cancel {
     background-color: #dc2626;
+}
+
+@media (max-width: 768px) {
+    .register {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .register form {
+        width: 50vw;
+    }
+}
+
+@media (max-width: 425px) {
+    .register {
+        margin-left: 0;
+    }
+
+    .register form {
+        width: 100%;
+    }
 }

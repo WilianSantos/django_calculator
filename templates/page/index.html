@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <section class="index">
+        <a href="{% url 'logout' %}" class="index__exit">
+            <i class="bi bi-box-arrow-right"></i>
+        </a>
+        <h1>Calculadora Avançada</h1>
+        <h2>Calculadora com histórico de operações</h2>
+        <div class="calculator">
+            <div class="calculator__content">
+    
+                <form action="{% url 'index_page' %}" id="form-calculator" method="post" encType="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="panel" id="panel">{{ result }}</div>
+                    <ul class="btn">
+                        <li><button type="button" class="btnCalculator btn--is_red" data-value="clearScreen">C</button></li>
+                        <li><button type="button" class="btnCalculator"  data-value="plusminus">&plusmn;</button></li>
+                        <li><button type="button" class="btnCalculator" data-value="%">%</button></li>
+                        <li><button type="button" class="btnCalculator btn--is_purple" data-value="/">&divide;</button></li>
+                        <li><button type="button" class="btnCalculator" data-value="7">7</button></li>
+                        <li><button type="button" class="btnCalculator" data-value="8">8</button></li>
+                        <li><button type="button" class="btnCalculator" data-value="9">9</button></li>
+                        <li><button type="button" class="btnCalculator btn--is_purple" data-value="*">&times;</button></li>
+                        <li><button type="button" class="btnCalculator" data-value="4">4</button></li>
+                        <li><button type="button" class="btnCalculator" data-value="5">5</button></li>
+                        <li><button type="button" class="btnCalculator" data-value="6">6</button></li>
+                        <li><button type="button" class="btnCalculator btn--is_purple" data-value="-">-</button></li>
+                        <li><button type="button" class="btnCalculator" data-value="1">1</button></li>
+                        <li><button type="button" class="btnCalculator" data-value="2">2</button></li>
+                        <li><button type="button" class="btnCalculator" data-value="3">3</button></li>
+                        <li><button type="button" class="btnCalculator btn--is_purple" data-value="+">+</button></li>
+                    </ul>
+                    <ul class="btn__end">
+                        <li class="btn__end__zero"><button type="button" class="btnCalculator" data-value="0">0</button></li>
+                        <li><button type="button" class="btnCalculator" data-value=".">.</button></li>
+                        <li><button type="button" class="btnCalculator btn__end--is_purple_blue" data-value="=">=</button></li>
+                    </ul>
+
+                    <!-- Inputs ocultos -->
+                    <input type="hidden" name="parameters" id="parameters">
+                    <input type="hidden" name="result" id="result">
+                </form>
+                
+            </div>
+
+            {% comment %} Histórico de operações {% endcomment %}
+            <div class="history">
+                <div class="history__header">
+                    <div class="history__header__title">
+                        <span>
+                            <i class="bi bi-clock-history"></i>
+                        </span>
+                        <h3>Histórico</h3>
+                    </div>
+                    <a href="{% url 'clear_history' %}">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </div>
+
+                <div class="history__content">
+                    {% for history in operations_history %}
+                        <div class="history__content__item">
+                            <span class="history__parameters">{{ history.parameters }}</span>
+                            <span class="history__result"> = {{ history.result }}</span>
+                            <span class="history__inclusion">{{ history.inclusion|date:"H:i" }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

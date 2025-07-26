@@ -2,18 +2,51 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: "Rubik", sans-serif;
+}
+
+html {
+    min-height: 100%;
+    background: linear-gradient(to bottom right, #0f0c29, #663399, #0f0c29);
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* para manter o fundo fixo mesmo com scroll */
+    background-size: cover;
 }
 
 body {
-    height: 100vh;
-    background: linear-gradient(to bottom right, #0f0c29, #663399, #0f0c29);
+    min-height: 100vh;
+    background: transparent;
     color: #fff;
 }
 
 .container {
     max-width: 1024px;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0 auto;
+}
+
+@media(max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+}
+
+.alert {
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.alert-error {
+    color: #dc2626;
+}
+
+.alert-success {
+    color: #39F78E;
+}
+
+.just-validate-error-label {
+    color: #dc2626;
+    font-size: 14px;
+    margin-top: 4px;
+    display: block;
 }
