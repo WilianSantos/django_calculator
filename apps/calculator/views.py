@@ -30,11 +30,11 @@ def indexPage(request):
             result=result,
             user_id=user
         )
+        
         panel = result
 
         return render(request, 'page/index.html', {'result': panel, 'operations_history': operations_history})
     
-
     return render(request, 'page/index.html', {'result': panel, 'operations_history': operations_history})
 
 

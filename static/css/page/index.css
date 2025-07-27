@@ -107,6 +107,22 @@
     overflow-y: scroll;
     border: 1px solid #AFAFAF;
     border-radius: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: #663399 rgba(30, 27, 58, 0.8);;
+}
+
+.history::-webkit-scrollbar {
+    width: 8px;
+}
+
+.history::-webkit-scrollbar-track {
+    background: rgba(30, 27, 58, 0.8);
+}
+
+.history::-webkit-scrollbar-thumb {
+    background-color: #663399;
+    border-radius: 8px;
+    border: 1px solid #AFAFAF;
 }
 
 .history__header {

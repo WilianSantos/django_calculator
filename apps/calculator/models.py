@@ -9,3 +9,6 @@ class Operation(models.Model):
     parameters = models.CharField(null=False, blank=False, max_length=30)
     result = models.CharField(null=False, blank=False, max_length=30)
     inclusion = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.user_id)

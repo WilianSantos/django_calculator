@@ -9,8 +9,12 @@ class User(models.Model):
     password = models.CharField(max_length=128, null=False, blank=False)
     inclusion = models.DateTimeField(auto_now_add=True)
 
+    # Funções para hash da senha
     def set_password(self, flat_password):
         self.password = make_password(flat_password)
 
     def check_password(self, flat_password):
         return check_password(flat_password, self.password)
+    
+    def __str__(self):
+        return self.name

@@ -8,8 +8,8 @@ from .models import User
 
 def loginPage(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
+        email = request.POST.get('email', '').strip()
+        password = request.POST.get('password', '').strip()
 
         user = User.objects.filter(email=email).first()
         if not user:
@@ -45,6 +45,10 @@ def registerPage(request):
 
         if User.objects.filter(email=email).exists():
             messages.error(request, 'E-mail já cadastrado.')
+            return render(request, 'page/register.html')
+        
+        if not all([name, email, password, confirm_password]):
+            messages.error(request, 'Preencha todos os campos.')
             return render(request, 'page/register.html')
 
         user = User(name=name, email=email)
